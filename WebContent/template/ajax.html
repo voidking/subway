@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+
+<script src="../public/lib/jquery/jquery.min.js"></script>
+<script>
+$(function(){
+    $.ajax({
+        url: '/subway/Login',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            username: 'huangbo',
+            password: 'huangbo'
+        },
+        success: function(data){
+            console.log(data);
+        },
+        error: function(xhr){
+            console.log(data);
+        }
+    });
+
+    // $.ajax({
+    //     url: '/subway/UpdatePwd',
+    //     type: 'POST',
+    //     dataType: 'json',
+    //     data: {
+    //         oldPwd: 'huangbo',
+    //         newPwd: 'xiaopang',
+    //         newPwd2: 'xiaopang'
+    //     },
+    //     success: function(data){
+    //         console.log(data);
+    //     },
+    //     error: function(xhr){
+    //         console.log(xhr);
+    //     }
+    // });
+
+    $.ajax({
+        url: '/subway/UpdateInfo',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            newEmail: 'huangbo@qq.com',
+            newTel: '13200000000'
+        },
+        success: function(data){
+            console.log(data);
+        },
+        error: function(xhr){
+            console.log(xhr);
+        }
+    });
+    
+});
+</script>
+</body>
+</html>

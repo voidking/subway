@@ -1,0 +1,37 @@
+@import url(./header.css);
+
+body{
+    background-color: #eee;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content{
+    margin-top: 100px;
+}
+.content input{
+    width: 60%;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 10px;
+    border: 0;
+    color: #fff;
+    font-size: 40px;
+    font-family: "Microsoft Yahei";
+}
+.content input:hover{
+    cursor: pointer;
+}
+
+#reg{
+    background-color: #aaa;
+}
+
+#login{
+    margin-top: 20px;
+    background-color: #00f;
+}
