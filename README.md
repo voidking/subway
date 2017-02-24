@@ -4,7 +4,7 @@
 前端：jquery+bootstrap+layer+arttemplate
 
 # 演示视频  
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qPKCRi7Hn5I" frameborder="0" allowfullscreen></iframe>  
+<iframe width="560" height="315" src="https://www.youtube.com/v/qPKCRi7Hn5I?html5=1" frameborder="0" allowfullscreen></iframe>  
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/93XVNIZ_fYI" frameborder="0" allowfullscreen></iframe>  
 
