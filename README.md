@@ -1,10 +1,12 @@
 # subway
-奇葩地铁售票系统，mysql+jdbc+servlet+freemarker+jquery+bootstrap+layer+arttemplate
+奇葩地铁售票系统。   
+后端：mysql+jdbc+servlet+junit+freemarker   
+前端：jquery+bootstrap+layer+arttemplate
 
-# 演示视频
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qPKCRi7Hn5I" frameborder="0" allowfullscreen></iframe>
+# 演示视频  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qPKCRi7Hn5I" frameborder="0" allowfullscreen></iframe>  
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/93XVNIZ_fYI" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/93XVNIZ_fYI" frameborder="0" allowfullscreen></iframe>  
 
 # 书签
 HTML5绘制上海地铁线路图  
