@@ -4,13 +4,11 @@
 前端：jquery+bootstrap+layer+arttemplate
 
 # 演示视频  
-普通用户使用说明：<iframe width="560" height="315" src="https://www.youtube.com/embed/qPKCRi7Hn5I" frameborder="0" allowfullscreen></iframe>  
+普通用户使用说明：  
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/qPKCRi7Hn5I/0.jpg)](http://www.youtube.com/watch?v=qPKCRi7Hn5I "普通用户使用说明")   
 
-管理员使用说明：<iframe width="560" height="315" src="https://www.youtube.com/embed/93XVNIZ_fYI" frameborder="0" allowfullscreen></iframe>  
-
-<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
-    <source id="mp4" src="http://7oxjrx.com1.z0.glb.clouddn.com//videos/direction.mp4" type="video/mp4">
-</video>
+管理员使用说明：   
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/93XVNIZ_fYI/0.jpg)](http://www.youtube.com/watch?v=93XVNIZ_fYI "管理员使用说明")
 
 # 书签
 HTML5绘制上海地铁线路图  
