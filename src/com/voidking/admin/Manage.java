@@ -1,4 +1,4 @@
-package com.voidking.servlet;
+package com.voidking.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.voidking.model.Admin;
 import com.voidking.model.Order;
 import com.voidking.model.User;
 import com.voidking.service.OrderService;
+import com.voidking.service.UserService;
 import com.voidking.util.DateComparator;
 
 import freemarker.template.Configuration;
@@ -25,18 +27,18 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 /**
- * Servlet implementation class UserPage
+ * Servlet implementation class Manage
  */
-@WebServlet("/UserPage")
-public class UserPage extends HttpServlet {
+@WebServlet("/Manage")
+public class Manage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private OrderService orderService = new OrderService();   
+    private UserService userService = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPage() {
+    public Manage() {
         super();
-        // TODO Auto-generated constructor stub
+        userService = new UserService();
     }
 
 	/**
@@ -45,11 +47,11 @@ public class UserPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("user");
+		Admin admin = (Admin)session.getAttribute("admin");
 		
-		if(user == null){
+		if(admin == null){
 			//System.out.println("重定向");
-			response.sendRedirect(request.getContextPath() + "/LoginPage");
+			response.sendRedirect(request.getContextPath() + "/Admin/LoginPage");
 			return;
 		}
 		//freemarker配置  
@@ -58,17 +60,15 @@ public class UserPage extends HttpServlet {
         config.setServletContextForTemplateLoading(context, "template");
         
         //加载模板文件  
-        Template template=config.getTemplate("userpage.ftl"); 
+        Template template=config.getTemplate("manage.ftl"); 
         
         //创建数据模型  
         Map<String,Object> map=new HashMap<String,Object>();  
         map.put("basePath", request.getContextPath());
-        map.put("user", user);
+        map.put("admin", admin);
         
-        ArrayList<Order> orderList = orderService.findOrdersByuserId(user.getId());
-        DateComparator comparator = new DateComparator();
-        Collections.sort(orderList, comparator);
-        map.put("orderList", orderList);
+        ArrayList<User> userList = userService.userList();
+        map.put("userList", userList);
         
         response.setCharacterEncoding("utf8");
         PrintWriter out = response.getWriter();

@@ -1,4 +1,4 @@
-package com.voidking.servlet;
+package com.voidking.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,23 +12,25 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.voidking.model.Order;
 import com.voidking.model.User;
 import com.voidking.service.OrderService;
+import com.voidking.service.UserService;
 
 /**
- * Servlet implementation class Return
+ * Servlet implementation class DeleteUser
  */
-@WebServlet("/Return")
-public class Return extends HttpServlet {
+@WebServlet("/DeleteUser")
+public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private OrderService orderService = new OrderService();
+    private UserService userService = null;
+    private OrderService orderService = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Return() {
+    public DeleteUser() {
         super();
-        // TODO Auto-generated constructor stub
+        userService = new UserService();
+        orderService = new OrderService();
     }
 
 	/**
@@ -37,19 +39,15 @@ public class Return extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		JSONObject jsonObj = null;
-		int id = Integer.parseInt(request.getParameter("id"));
-		String state = request.getParameter("state");
-		
-		
-		boolean flag1 = orderService.updateState(id, state);
-		Order order = orderService.findById(id);
-		boolean flag2 = orderService.updateRePrice(id, order.getPrice());
-		if(flag1 && flag2){
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		boolean flag1 = userService.deleteUser(userId);
+		boolean flag2 = orderService.deleteOrderByuserId(userId);
+		//System.out.println(flag1 + "" + flag2);
+		if(flag1 && flag2){			
 			jsonObj = new JSONObject("{'code':'0','ext':'success'}");
 		}else{
-			jsonObj = new JSONObject("{'code':'1','ext':'未知错误'}");
+			jsonObj = new JSONObject("{'code':'1','ext':'删除失败'}");
 		}
-		
 		
 		response.setCharacterEncoding("utf8");
 		PrintWriter pw = response.getWriter();

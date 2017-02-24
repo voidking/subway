@@ -1,4 +1,4 @@
-package com.voidking.servlet;
+package com.voidking.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,21 +12,20 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.voidking.model.Order;
-import com.voidking.model.User;
-import com.voidking.service.OrderService;
+import com.voidking.model.Admin;
+import com.voidking.service.AdminService;
 
 /**
- * Servlet implementation class Return
+ * Servlet implementation class Login
  */
-@WebServlet("/Return")
-public class Return extends HttpServlet {
+@WebServlet("/Admin/Login")
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private OrderService orderService = new OrderService();
+	private AdminService adminService = new AdminService();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Return() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,19 +36,28 @@ public class Return extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		JSONObject jsonObj = null;
-		int id = Integer.parseInt(request.getParameter("id"));
-		String state = request.getParameter("state");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 		
-		
-		boolean flag1 = orderService.updateState(id, state);
-		Order order = orderService.findById(id);
-		boolean flag2 = orderService.updateRePrice(id, order.getPrice());
-		if(flag1 && flag2){
+		Admin admin = adminService.login(username, password);
+		if(admin != null){
+			//使用request对象的getSession()获取session，如果session不存在则创建一个
+			HttpSession session = request.getSession();
+			//将数据存储到session中
+			session.setAttribute("admin", admin);
+			//获取session的Id
+			//String sessionId = session.getId();
+			//判断session是不是新创建的
+			if (session.isNew()) {
+				//response.getWriter().print("session创建成功，session的id是："+sessionId);
+			}else {
+				//response.getWriter().print("服务器已经存在该session了，session的id是："+sessionId);
+			}
+			
 			jsonObj = new JSONObject("{'code':'0','ext':'success'}");
 		}else{
-			jsonObj = new JSONObject("{'code':'1','ext':'未知错误'}");
+			jsonObj = new JSONObject("{'code':'1','ext':'用户名或密码错误'}");
 		}
-		
 		
 		response.setCharacterEncoding("utf8");
 		PrintWriter pw = response.getWriter();

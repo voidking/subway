@@ -1,4 +1,4 @@
-package com.voidking.servlet;
+package com.voidking.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,25 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
 import com.voidking.model.Order;
-import com.voidking.model.User;
 import com.voidking.service.OrderService;
 
 /**
- * Servlet implementation class Return
+ * Servlet implementation class UpdateOrder
  */
-@WebServlet("/Return")
-public class Return extends HttpServlet {
+@WebServlet("/UpdateOrder")
+public class UpdateOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private OrderService orderService = new OrderService();
+    private OrderService orderService = new OrderService();   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Return() {
+    public UpdateOrder() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,11 +37,12 @@ public class Return extends HttpServlet {
 		JSONObject jsonObj = null;
 		int id = Integer.parseInt(request.getParameter("id"));
 		String state = request.getParameter("state");
+		Double rePrice = Double.parseDouble(request.getParameter("rePrice"));
 		
 		
 		boolean flag1 = orderService.updateState(id, state);
 		Order order = orderService.findById(id);
-		boolean flag2 = orderService.updateRePrice(id, order.getPrice());
+		boolean flag2 = orderService.updateRePrice(id, rePrice);
 		if(flag1 && flag2){
 			jsonObj = new JSONObject("{'code':'0','ext':'success'}");
 		}else{

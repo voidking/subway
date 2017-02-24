@@ -1,4 +1,4 @@
-package com.voidking.servlet;
+package com.voidking.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,21 +12,19 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.voidking.model.Order;
 import com.voidking.model.User;
-import com.voidking.service.OrderService;
 
 /**
- * Servlet implementation class Return
+ * Servlet implementation class Logout
  */
-@WebServlet("/Return")
-public class Return extends HttpServlet {
+@WebServlet("/Admin/Logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private OrderService orderService = new OrderService();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Return() {
+    public Logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,19 +35,11 @@ public class Return extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		JSONObject jsonObj = null;
-		int id = Integer.parseInt(request.getParameter("id"));
-		String state = request.getParameter("state");
 		
-		
-		boolean flag1 = orderService.updateState(id, state);
-		Order order = orderService.findById(id);
-		boolean flag2 = orderService.updateRePrice(id, order.getPrice());
-		if(flag1 && flag2){
-			jsonObj = new JSONObject("{'code':'0','ext':'success'}");
-		}else{
-			jsonObj = new JSONObject("{'code':'1','ext':'未知错误'}");
-		}
-		
+		HttpSession session = request.getSession();
+		session.setAttribute("admin", null);
+			
+		jsonObj = new JSONObject("{'code':'0','ext':'success'}");
 		
 		response.setCharacterEncoding("utf8");
 		PrintWriter pw = response.getWriter();

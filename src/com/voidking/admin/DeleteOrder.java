@@ -1,4 +1,4 @@
-package com.voidking.servlet;
+package com.voidking.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,23 +12,23 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.voidking.model.Order;
 import com.voidking.model.User;
 import com.voidking.service.OrderService;
+import com.voidking.service.UserService;
 
 /**
- * Servlet implementation class Return
+ * Servlet implementation class DeleteUser
  */
-@WebServlet("/Return")
-public class Return extends HttpServlet {
+@WebServlet("/DeleteOrder")
+public class DeleteOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private OrderService orderService = new OrderService();
+    private OrderService orderService = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Return() {
+    public DeleteOrder() {
         super();
-        // TODO Auto-generated constructor stub
+        orderService = new OrderService();
     }
 
 	/**
@@ -37,19 +37,14 @@ public class Return extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		JSONObject jsonObj = null;
-		int id = Integer.parseInt(request.getParameter("id"));
-		String state = request.getParameter("state");
-		
-		
-		boolean flag1 = orderService.updateState(id, state);
-		Order order = orderService.findById(id);
-		boolean flag2 = orderService.updateRePrice(id, order.getPrice());
-		if(flag1 && flag2){
+		int orderId = Integer.parseInt(request.getParameter("orderId"));
+		boolean flag = orderService.deleteOrderById(orderId);
+
+		if(flag){			
 			jsonObj = new JSONObject("{'code':'0','ext':'success'}");
 		}else{
-			jsonObj = new JSONObject("{'code':'1','ext':'未知错误'}");
+			jsonObj = new JSONObject("{'code':'1','ext':'删除失败'}");
 		}
-		
 		
 		response.setCharacterEncoding("utf8");
 		PrintWriter pw = response.getWriter();

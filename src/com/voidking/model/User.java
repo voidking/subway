@@ -6,6 +6,7 @@ public class User {
 	private String password;
 	private String email;
 	private String tel;
+	private int deleted;
 	
 	public int getId() {
 		return id;
@@ -39,10 +40,19 @@ public class User {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+	
+	
+	public int getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
+	}
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 	public User(int id, String username, String password) {
 		super();

@@ -1,9 +1,10 @@
-package com.voidking.servlet;
+package com.voidking.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.voidking.model.Admin;
 import com.voidking.model.Order;
-import com.voidking.model.User;
+import com.voidking.model.Sales;
 import com.voidking.service.OrderService;
 import com.voidking.util.DateComparator;
 
@@ -25,18 +27,19 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 /**
- * Servlet implementation class UserPage
+ * Servlet implementation class Order
  */
-@WebServlet("/UserPage")
-public class UserPage extends HttpServlet {
+@WebServlet("/ManageCount")
+public class ManageCount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private OrderService orderService = new OrderService();   
+    private OrderService orderService = null;   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPage() {
+    public ManageCount() {
         super();
         // TODO Auto-generated constructor stub
+        orderService = new OrderService();
     }
 
 	/**
@@ -45,11 +48,11 @@ public class UserPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("user");
+		Admin admin = (Admin)session.getAttribute("admin");
 		
-		if(user == null){
+		if(admin == null){
 			//System.out.println("重定向");
-			response.sendRedirect(request.getContextPath() + "/LoginPage");
+			response.sendRedirect(request.getContextPath() + "/Admin/LoginPage");
 			return;
 		}
 		//freemarker配置  
@@ -58,17 +61,16 @@ public class UserPage extends HttpServlet {
         config.setServletContextForTemplateLoading(context, "template");
         
         //加载模板文件  
-        Template template=config.getTemplate("userpage.ftl"); 
+        Template template=config.getTemplate("manage-count.ftl"); 
         
         //创建数据模型  
         Map<String,Object> map=new HashMap<String,Object>();  
         map.put("basePath", request.getContextPath());
-        map.put("user", user);
+        map.put("admin", admin);
         
-        ArrayList<Order> orderList = orderService.findOrdersByuserId(user.getId());
-        DateComparator comparator = new DateComparator();
-        Collections.sort(orderList, comparator);
-        map.put("orderList", orderList);
+        ArrayList<Date> dateList = orderService.dateList();
+        ArrayList<Sales> salesList = orderService.salesList(dateList);
+        map.put("salesList", salesList);
         
         response.setCharacterEncoding("utf8");
         PrintWriter out = response.getWriter();

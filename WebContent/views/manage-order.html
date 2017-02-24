@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+  <title>后台管理-订单管理</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../public/css/dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" href="../public/css/manage-order.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">南京地铁后台管理</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">修改密码</a></li>
+          <li><a href="#">退出</a></li>
+        </ul>
+        <!--
+        <form class="navbar-form navbar-right">
+          <input type="text" class="form-control" placeholder="Search...">
+        </form>
+        -->
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li><a href="#">用户管理</a></li>
+          <li class="active"><a href="#">订单管理</a></li>
+          <li><a href="#">销售统计</a></li>
+        </ul>
+        <!--
+        <ul class="nav nav-sidebar">
+          <li><a href="">Nav item</a></li>
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+          <li><a href="">More navigation</a></li>
+        </ul>
+        -->
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">订单管理</h1>
+        <div class="search input-group">
+          <input type="text" class="form-control" placeholder="输入关键词">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">搜索</button>
+          </span>
+        </div>
+        <h2 class="sub-header">订单信息</h2>
+        <div class="table-responsive">
+          <table class="order-table table table-striped">
+            <thead>
+              <tr>
+                <th>订单号</th>
+                <th>用户名</th>
+                <th>出发站点</th>
+                <th>到达站点</th>
+                <th>购票时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1000000000</td>
+                <td>Lorem</td>
+                <td>龙眠大道</td>
+                <td>软件大道</td>
+                <td>2017-01-20 22:00:00</td>
+                <td><a class="detail" href="javascript:void(0);">查看详情</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="pane-hide" style="display: none;">
+  <div class="pane">
+    <span>订单号：12000000</span>
+    <span>用户名：voidking</span>
+    <span>出发站点：龙眠大道</span>
+    <span>到达站点：软件大道</span>
+    <span>购买时间：2017-02-11 12:00:00</span>
+    <span>状态：未取票</span>
+    <span><button class="btn btn-warning">退票</button></span>
+    <span><button class="btn btn-danger">删除订单</button></span>
+  </div>
+</div>
+
+
+<script src="../public/lib/jquery/jquery.min.js"></script>
+<script src="../public/lib/layer/src/layer.js"></script>
+<script>
+$(function(){
+  $('.order-table').on('click','.detail',function(){
+    //页面层
+    layer.open({
+      type: 1,
+      title: '订单详情',
+      skin: 'layui-layer-rim', //加上边框
+      area: ['400px', '350px'], //宽高
+      content: $('.pane-hide').html()
+    });
+  });
+});
+</script>
+</body>
+</html>
