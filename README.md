@@ -8,6 +8,10 @@
 
 管理员使用说明：<iframe width="560" height="315" src="https://www.youtube.com/embed/93XVNIZ_fYI" frameborder="0" allowfullscreen></iframe>  
 
+<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
+    <source id="mp4" src="http://7oxjrx.com1.z0.glb.clouddn.com//videos/direction.mp4" type="video/mp4">
+</video>
+
 # 书签
 HTML5绘制上海地铁线路图  
 http://www.daqianduan.com/5376.html  
