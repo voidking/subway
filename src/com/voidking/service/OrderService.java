@@ -33,7 +33,7 @@ public class OrderService {
 	public ArrayList<Order> findOrdersByuserId(int userId){
 		ArrayList<Order> result = new ArrayList<Order>();
 		try {
-			String sql = "select * from sub_order where user_id = ?";
+			String sql = "select * from sub_order where user_id = ? and deleted = 0";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			// 设定参数
 			pstmt.setInt(1, userId); 
@@ -42,8 +42,8 @@ public class OrderService {
 			
 			while(rs.next()){
 				int id = rs.getInt("id");
-				User user = userService.findById(id);
 				String order_number = rs.getString("order_number");
+				User user = userService.findById(userId);
 				int user_id = rs.getInt("user_id");
 				String username = user.getUsername();
 				String one_site = rs.getString("one_site");

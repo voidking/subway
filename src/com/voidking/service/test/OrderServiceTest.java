@@ -81,5 +81,8 @@ public class OrderServiceTest {
 		assertNotEquals(orderList, 0);
 	}
 
-
+	@Ignore
+	public void testfindOrdersByuserId(){
+		
+	}
 }
