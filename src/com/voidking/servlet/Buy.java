@@ -14,8 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import com.voidking.model.Limit;
 import com.voidking.model.Order;
 import com.voidking.model.User;
+import com.voidking.service.LimitService;
 import com.voidking.service.OrderService;
 import com.voidking.util.MyRandom;
 
@@ -25,7 +27,8 @@ import com.voidking.util.MyRandom;
 @WebServlet("/Buy")
 public class Buy extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private OrderService orderService = new OrderService();   
+    private OrderService orderService = new OrderService(); 
+    private LimitService limitService = new LimitService();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -50,14 +53,36 @@ public class Buy extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		
-		
-		Order order = orderService.creatOrder(orderNumber, user.getId(), oneSite, twoSite, price, "待取票");
-		if(order != null){
-			jsonObj = new JSONObject("{'code':'0','ext':'success'}");
+		if(!limitService.isStarted()){
+			Order order = orderService.creatOrder(orderNumber, user.getId(), oneSite, twoSite, price, "待取票");
+			if(order != null){
+				jsonObj = new JSONObject("{'code':'0','ext':'success'}");
+			}else{
+				// 写入数据库失败
+				jsonObj = new JSONObject("{'code':'1','ext':'写入数据失败'}");
+			}
 		}else{
-			// 写入数据库失败
-			jsonObj = new JSONObject("{'code':'1','ext':'未知错误'}");
+			Limit limit = limitService.getLimit();
+			
+			if(!limit.getOneSite().equals(oneSite) || !limit.getTwoSite().equals(twoSite)){
+				jsonObj = new JSONObject("{'code':'2','ext':'选择的站点被禁止购票，请重新选择！'}");
+			}else{
+				if(limit.getTotalTickets() == limit.getSoldTickets()){
+					jsonObj = new JSONObject("{'code':'3','ext':'票已售光'}");
+				}else{
+					Order order = orderService.creatOrder(orderNumber, user.getId(), oneSite, twoSite, price, "待取票");
+					if(order != null){
+						limitService.soldOne();
+						jsonObj = new JSONObject("{'code':'0','ext':'success'}");
+					}else{
+						// 写入数据库失败
+						jsonObj = new JSONObject("{'code':'1','ext':'写入数据失败'}");
+					}
+				}		
+			}
+			
 		}
+		
 
 		response.setCharacterEncoding("utf8");
 		PrintWriter pw = response.getWriter();

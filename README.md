@@ -10,6 +10,11 @@
 管理员使用说明：   
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/93XVNIZ_fYI/0.jpg)](http://www.youtube.com/watch?v=93XVNIZ_fYI "管理员使用说明")
 
+# 路线限制
+奇葩功能：限制只能某两个站点才能售票。   
+![](http://7oxjrx.com1.z0.glb.clouddn.com//imgs/subway/result.gif)
+
+
 # 书签
 HTML5绘制上海地铁线路图  
 http://www.daqianduan.com/5376.html  

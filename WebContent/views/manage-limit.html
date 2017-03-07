@@ -6,11 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 
-  <title>后台管理-销售统计</title>
+  <title>后台管理-限制管理</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="${basePath}/public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="${basePath}/public/css/dashboard.css" rel="stylesheet">
+  <link href="../public/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../public/lib/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css">
+  <link href="../public/css/dashboard.css" rel="stylesheet">
+  <style>
+    p{
+      font-size: 18px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -28,8 +35,8 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="javascript:void(0);">${admin.username}</a></li>
-          <li><a href="javascript:void(0);" id="logout">退出</a></li>
+          <li><a href="#">修改密码</a></li>
+          <li><a href="#">退出</a></li>
         </ul>
         <!--
         <form class="navbar-form navbar-right">
@@ -44,11 +51,10 @@
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
         <ul class="nav nav-sidebar">
-          <li><a href="${basePath}/Manage">用户管理</a></li>
-          <li><a href="${basePath}/ManageOrder">订单管理</a></li>
-          <li class="active"><a href="${basePath}/ManageCount">销售统计</a></li>
-          <li><a href="${basePath}/ManageLimit">限制管理</a></li>
-          
+          <li ><a href="#">用户管理</a></li>
+          <li><a href="#">订单管理</a></li>
+          <li><a href="#">销售统计</a></li>
+          <li class="active"><a href="#">限制管理</a></li>
         </ul>
         <!--
         <ul class="nav nav-sidebar">
@@ -61,45 +67,45 @@
         -->
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header">销售统计</h1>
-        <h2 class="sub-header">统计信息</h2>
+        <h1 class="page-header">限制管理</h1>
+        <h2 class="sub-header">站点设置</h2>
         <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>日期</th>
-                <th>销量</th>
-                <th>退票量</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <#list salesList as sales>
-              <tr>
-                <td>${sales.date}</td>
-                <td>${sales.sell}</td>
-                <td>${sales.ret}</td>
-                <td><a target="_blank" href="${basePath}/ManageOrder2?date=${sales.date}">查看当日详情</a></td>
-              </tr>
-              </#list>
-            </tbody>
-          </table>
+          <p>
+            <span>可售票站点1：</span>
+            <select name="" id="">
+              <option value="">龙眠大道</option>
+              <option value="">软件大道</option>
+            </select>
+          </p>
+          <p>
+            <span>可售票站点2：</span>
+            <select name="" id="">
+              <option value="">龙眠大道</option>
+              <option value="">软件大道</option>
+            </select>
+          </p>
+          <p>
+            <span>票数上限：</span>
+            <input type="text">
+          </p>
+          <p>
+            <span>是否启用：</span>
+            <input id="switch" type="checkbox" checked />
+          </p>
+          <p>
+            <button class="btn btn-primary">确定</button>
+          </p>
         </div>
       </div>
     </div>
   </div>
 
-<input id="basePath" type="hidden" value="${basePath}">
-<script type="text/html" id="order-template">
 
-</script>
-<script src="${basePath}/public/lib/jquery/jquery.min.js"></script>
-<script src="${basePath}/public/lib/art-template/dist/template.js"></script> 
-<script src="${basePath}/public/lib/layer/src/layer.js"></script>
-<script src="${basePath}/public/js/adminlogout.js"></script>
+<script src="../public/lib/jquery/jquery.min.js"></script>
+<script src="../public/lib/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
 <script>
 $(function(){
-
+  $('#switch').bootstrapSwitch();
 });
 </script>
 </body>

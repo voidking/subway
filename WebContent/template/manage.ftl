@@ -47,6 +47,8 @@
           <li class="active"><a href="${basePath}/Manage">用户管理</a></li>
           <li><a href="${basePath}/ManageOrder">订单管理</a></li>
           <li><a href="${basePath}/ManageCount">销售统计</a></li>
+          <li><a href="${basePath}/ManageLimit">限制管理</a></li>
+
         </ul>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
