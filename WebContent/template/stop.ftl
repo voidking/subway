@@ -19,6 +19,11 @@
             <span class="price">总价为：<b id="price">0</b>&nbsp;元</span>
             <input id="confirm" type="button" name="confirm" value="确认购票">
         </div>
+        <#if (limit.started == 1)>
+        <div class="limit">
+            <p>提示：管理员设置了购票限制，只能购买从<span>${limit.oneSite}</span>站到<span>${limit.twoSite}</span>站的车票，余票<span>${limit.totalTickets - limit.soldTickets}</span>张。</p>
+        </div>
+        </#if>
     </div>
     <div class="footer">
         

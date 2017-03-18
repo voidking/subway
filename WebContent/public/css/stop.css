@@ -59,6 +59,16 @@
     cursor: pointer;
 }
 
+.limit{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.limit span{
+    color: #FA851B;
+}
+
 
 #mapframe{
     width: 100%;

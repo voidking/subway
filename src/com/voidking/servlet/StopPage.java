@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.voidking.model.Limit;
+import com.voidking.service.LimitService;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -22,7 +25,7 @@ import freemarker.template.TemplateException;
 @WebServlet("/StopPage")
 public class StopPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private LimitService limitService = new LimitService();   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,6 +50,9 @@ public class StopPage extends HttpServlet {
         //创建数据模型  
         Map<String,Object> map=new HashMap<String,Object>();  
         map.put("basePath", request.getContextPath());
+        
+        Limit limit = limitService.getLimit();
+        map.put("limit", limit);
         
         response.setCharacterEncoding("utf8");
         PrintWriter out = response.getWriter();
